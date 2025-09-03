@@ -10,6 +10,7 @@ environment:
   flutter: ">=3.22.0"
 
 dependencies:
+  dart_duckdb: ^1.2.2
   flutter:
     sdk: flutter
 
@@ -20,6 +21,7 @@ dependencies:
     # The example app is bundled with the plugin so we use a path dependency on
     # the parent directory to use the current plugin's version.
     path: ../
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:

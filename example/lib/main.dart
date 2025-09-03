@@ -89,7 +89,7 @@ class _ExamplePageState extends State<ExamplePage> {
         playSound: false,
       ),
       foregroundTaskOptions: ForegroundTaskOptions(
-        eventAction: ForegroundTaskEventAction.repeat(5000),
+        eventAction: ForegroundTaskEventAction.repeat(10000),
         autoRunOnBoot: true,
         autoRunOnMyPackageReplaced: true,
         allowWakeLock: true,
@@ -131,8 +131,8 @@ class _ExamplePageState extends State<ExamplePage> {
     _taskDataListenable.value = data;
   }
 
-  void _incrementCount() {
-    FlutterForegroundTask.sendDataToTask(MyTaskHandler.incrementCountCommand);
+  void _exportDb() {
+    FlutterForegroundTask.sendDataToTask(MyTaskHandler.exportDbCommand);
   }
 
   @override
@@ -172,7 +172,7 @@ class _ExamplePageState extends State<ExamplePage> {
         body: SafeArea(
           child: ListView(
             children: [
-              Expanded(child: _buildCommunicationDataText()),
+              _buildCommunicationDataText(),
               _buildServiceControlButtons(),
             ],
           ),
@@ -213,7 +213,7 @@ class _ExamplePageState extends State<ExamplePage> {
         children: [
           buttonBuilder('start service', onPressed: _startService),
           buttonBuilder('stop service', onPressed: _stopService),
-          buttonBuilder('increment count', onPressed: _incrementCount),
+          buttonBuilder('export database', onPressed: _exportDb),
         ],
       ),
     );
