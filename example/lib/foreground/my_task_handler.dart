@@ -4,9 +4,7 @@ import 'dart:io' as io;
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:dart_duckdb/dart_duckdb.dart';
 
-import 'package:path_provider/path_provider.dart';
-
-
+//import 'package:path_provider/path_provider.dart';
 
 class MyTaskHandler extends TaskHandler {
 
@@ -20,14 +18,13 @@ static const String exportDbCommand = 'exportDb';
     int counter = 0;   
 
     Timer.periodic(
-      const Duration(milliseconds: 500),
+      const Duration(milliseconds: 50),
       (_) {
         counter++;
         controller.add(counter);
     });
 
     return controller.stream;
-    
   }
 
   StreamSubscription? subscription;
@@ -66,7 +63,6 @@ static const String exportDbCommand = 'exportDb';
     subscription = null;
     print('stopped listening');
   }
-
 
   void exportCsv() async {  
     //final dir = await getExternalStorageDirectory();  
@@ -110,6 +106,7 @@ static const String exportDbCommand = 'exportDb';
   @override
   Future<void> onDestroy(DateTime timestamp, bool isTimeout) async {
     stopListening();
+    exportCsv();
     closeDb();
     print('onDestroy(isTimeout: $isTimeout)');
   }
@@ -125,6 +122,7 @@ static const String exportDbCommand = 'exportDb';
 
   @override
   void onRepeatEvent(DateTime timestamp) {
+    //flush buffer 
   }
 
   // Called when the notification button is pressed.
